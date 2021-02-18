@@ -9,9 +9,29 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: $font-light;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+
+.Toastify{
+  .Toastify__toast-container--top-center{
+    width: 100%;
+    top: 0;
+    padding: 0;
+    margin-top: 0;
+
+    .Toastify__toast--success{
+      background-color: $background-primary;
+
+      .Toastify__close-button {
+        align-self: center;
+
+      }
+    }
+  }
 }
