@@ -11,8 +11,7 @@ function App() {
 
 
   firebase.auth().onAuthStateChanged(currentUser => {
-    console.log(currentUser);
-    
+
     if(!currentUser?.emailVerified){
       firebase.auth().signOut();
       setUser(null);
@@ -20,8 +19,6 @@ function App() {
       setUser(currentUser);
     }
     setIsLoading(false);
-
-    
   });
 
   if(isLoading){
