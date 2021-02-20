@@ -4,6 +4,10 @@ import Routes from "../../routes/Routes";
 import {BrowserRouter as Router} from "react-router-dom";
 import "./LoggedLayout.scss";
 import MenuLeft from "../../components/MenuLeft";
+import TopBar from "../../components/TopBar/TopBar";
+import firebase from "../../utils/firebase";
+import "firebase/auth";
+
 
 export default function LoggedLayout(props) {
   const {user} = props;
@@ -17,7 +21,7 @@ export default function LoggedLayout(props) {
             <MenuLeft user={user} />
           </Grid.Column>
           <GridColumn className="content" width={13}>
-            <h2>TopBar</h2>
+            <TopBar user={user}/>
             <Routes />
           </GridColumn>
         </Grid.Row>
