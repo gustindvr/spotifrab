@@ -13,7 +13,7 @@ function MenuLeft(props) {
   const [showModal, setShowModal] = useState(false);
   const [titleModal, setTitleModal] = useState("");
   const [contentModal, setContentModal] = useState(null);
-  
+
   useEffect(() => {
     isUserAdmin(user.uid).then(response => {
       setUserAdmin(response);

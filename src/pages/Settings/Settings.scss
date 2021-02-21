@@ -26,7 +26,44 @@
         border-radius: 50px;
       }
     }
+
+    .user-name{
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      align-items: center;
+
+      h2{
+        margin: 0 20px !important;
+      }
+
+      i{
+        cursor: pointer;
+      }
+    }
+
   }
 
+  .user-email,
+  .user-password{
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 40px;
+
+    h3{
+      margin: 0;
+      
+      span{
+        color: $primary-color;
+        margin-left: 5px;
+      }
+    }
+
+    i{
+      cursor: pointer;
+    }
+
+  }
 
 }
