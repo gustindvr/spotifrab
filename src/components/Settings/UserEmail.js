@@ -1,7 +1,10 @@
 import React, {useState} from 'react';
 import {Icon,Button, Form, Input} from 'semantic-ui-react';
 import {toast} from 'react-toastify';
-import {reauthenticate} from '../../utils/Api'
+import {reauthenticate} from '../../utils/Api';
+import alertErrors from '../../utils/AlertErrors';
+import firebase from '../../utils/firebase';
+import 'firebase/auth';
 
 export default function UserEmail(props) {
   const {user, setShowModal, setContentModal, setTitleModal} = props
@@ -23,9 +26,9 @@ export default function UserEmail(props) {
 
 function ChangeEmailForm(props) {
   const {email, setShowModal} = props
+  const [formData, setFormData] = useState({email: "", password: ""});
   const [showPassword, setShowPassword] = useState(false);
-  const [formData, setFormData] = useState(email)
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = () => {
     if(!formData.email) {
@@ -33,9 +36,21 @@ function ChangeEmailForm(props) {
     }else {
       setIsLoading(true);
       reauthenticate(formData.password).then(() => {
-        
+        const currentUser = firebase.auth().currentUser;
+        currentUser.updateEmail(formData.email).then(() => {
+          toast.success("Email actualizado.");
+          setIsLoading(false);
+          setShowModal(false);
+          currentUser. sendEmailVerification().then(() => {
+            firebase.auth().signOut();
+          })
+       }).catch(err => { 
+         alertErrors(err?.code);
+         setIsLoading(false);
+       })
       }).catch(err => {
-        console.error(err);
+        alertErrors(err?.code);
+        setIsLoading(false);
       })
     }
   }
@@ -46,12 +61,14 @@ function ChangeEmailForm(props) {
         <Input 
           type="text"
           defaultValue={email}
+          onChange={e => setFormData({ ...formData, email: e.target.value})}
         />
       </Form.Field>
       <Form.Field>
         <Input 
           placeholder="Contraseña"
           type={showPassword ? "text" : "password"}
+          onChange={e => setFormData({ ...formData, password: e.target.value})}
           icon={
           <Icon 
             name={showPassword ? "eye slash outline" : "eye"} 
@@ -60,7 +77,7 @@ function ChangeEmailForm(props) {
           />}
         />
       </Form.Field>
-      <Button type="submit" loading={isLoading}> Actualizar E-mail</Button>
+      <Button type="submit" loading={isLoading}> Actualizar email</Button>
     </Form>
 
   )

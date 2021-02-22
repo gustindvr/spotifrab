@@ -17,6 +17,6 @@ export const reauthenticate = password => {
     password
   );
 
-    return user.reauthenticateWithCredential(credentials)
+    return user.reauthenticateWithCredential(credentials);
 
 }
