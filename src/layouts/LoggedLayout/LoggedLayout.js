@@ -10,7 +10,7 @@ import "firebase/auth";
 
 
 export default function LoggedLayout(props) {
-  const {user} = props;
+  const {user, setReloadApp} = props;
 
 
   return (
@@ -22,7 +22,7 @@ export default function LoggedLayout(props) {
           </Grid.Column>
           <GridColumn className="content" width={13}>
             <TopBar user={user}/>
-            <Routes />
+            <Routes user={user} setReloadApp={setReloadApp} />
           </GridColumn>
         </Grid.Row>
         <Grid.Row>

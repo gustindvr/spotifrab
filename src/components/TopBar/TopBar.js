@@ -9,7 +9,6 @@ import "./topBar.scss";
 
 function TopBar(props) {
   const { user, history } = props;
-
   const goBack = () => {
     history.goBack();
   }
@@ -25,7 +24,7 @@ function TopBar(props) {
       </div>
       <div className="top-bar__right">
         <Link to="/settings">
-          <Image src={UserImage} />
+          <Image src={user.photoURL ? user.photoURL : UserImage} />
           {user.displayName}
         </Link>
         <Icon name="power off" onClick={logout} />
