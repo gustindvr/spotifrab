@@ -1,10 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {Menu, Icon} from "semantic-ui-react";
-import {Link, withRouter} from "react-router-dom";
-import {isUserAdmin} from "../../utils/Api";
-import BasicModal from "../Modal/BasicModal/BasicModal";
+import {Menu, Icon} from 'semantic-ui-react';
+import {Link, withRouter} from 'react-router-dom';
+import {isUserAdmin} from '../../utils/Api';
+import AddArtistForm from '../Artists/AddArtistForm/AddArtistForm';
+import BasicModal from '../Modal/BasicModal/BasicModal';
 
-import "./MenuLeft.scss";
+import './MenuLeft.scss';
 
 function MenuLeft(props) {
   const {user, location} = props;
@@ -26,9 +27,9 @@ function MenuLeft(props) {
 
   const hanlderModal = (type) => {
     switch (type) {
-      case "artist":
+      case "artists":
         setTitleModal("Nuevo Artista");
-        setContentModal(<h2>Formulario nuevo artista</h2>)
+        setContentModal(<AddArtistForm  setShowModal={setShowModal} />)
         setShowModal(true);
         break;
         case "song":
@@ -51,7 +52,7 @@ function MenuLeft(props) {
           <Menu.Item as={Link} to="/" active={activeMenu === "/"} onClick={handlerMenu}>
             <Icon name="home" /> Inicio
           </Menu.Item>
-          <Menu.Item as={Link} to="/artist" active={activeMenu === "/artist"} onClick={handlerMenu}>
+          <Menu.Item as={Link} to="/artists" active={activeMenu === "/artists"} onClick={handlerMenu}>
             <Icon name="music" /> Artistas
           </Menu.Item>
         </div>
